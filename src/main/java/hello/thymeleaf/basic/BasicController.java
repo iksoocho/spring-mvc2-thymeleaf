@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jakarta.annotation.Generated;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -122,6 +121,36 @@ public class BasicController {
     }
 
 
+    @GetMapping("/condition")
+    public String condition(Model model){
+        addUsers(model);
+        return "basic/condition";
+    }
+
+
+    @GetMapping("/comments")
+    public String commnets(Model model){
+        model.addAttribute("data", "Spring!");
+        return "basic/comments";   
+    }
+
+
+    @GetMapping("/block")
+    public String block(Model model){
+        addUsers(model);
+        return "basic/block";
+    }
+
+    @GetMapping("/javascript")
+    public String javascript(Model model) {
+        model.addAttribute("user", new User("UserA", 10));
+        addUsers(model);
+        return "basic/javascript";
+    }
+
+
+
+
     private void addUsers(Model model){
         List<User> list = new ArrayList<>();
         list.add(new User("UserA", 10));
@@ -135,7 +164,7 @@ public class BasicController {
 
 
     @Data
-    static class User {
+    public static class User {
         private String username;
         private int age;
 
